@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 interface Props{}
 
-export default async function Page(props: Props) {
+export default function Page(props: Props) {
   // const revenue = await fetchRevenue();
   // const latestInvoices = await fetchLatestInvoices();
   // const numberOfInvoices = await sql<number>`SELECT COUNT(*) FROM invoices`;
