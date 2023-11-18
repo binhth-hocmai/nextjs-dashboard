@@ -1,4 +1,3 @@
-import { sql } from '@vercel/postgres';
 import { Suspense } from 'react';
 
 import RevenueChart from "@/app/ui/dashboard/revenue-chart";
