@@ -7,8 +7,6 @@ import LatestInvoices from "@/app/ui/dashboard/latest-invoices";
 import CardWrapper, { Card } from '../ui/dashboard/cards';
 import { CardsSkeleton, LatestInvoicesSkeleton, RevenueChartSkeleton } from '../ui/skeletons';
 
-export const dynamic = "force-dynamic";
-
 interface Props{}
 
 export default function Page(props: Props) {
