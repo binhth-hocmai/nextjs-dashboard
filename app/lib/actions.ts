@@ -65,7 +65,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
     };
   }
   
-  const { customerId, amount, status } = CreateInvoice.safeParse({
+  const { customerId, amount, status } = CreateInvoice.parse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
@@ -104,7 +104,7 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
     };
   }
   
-  const { customerId, amount, status } = CreateInvoice.safeParse({
+  const { customerId, amount, status } = CreateInvoice.parse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
