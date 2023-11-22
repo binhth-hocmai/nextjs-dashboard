@@ -69,10 +69,10 @@ export async function registerEmail(
 
   const handlebarOptions = {
     viewEngine: {
-        partialsDir: './app/ui/email/',
+        partialsDir: path.resolve('./app/ui/email/'),
         defaultLayout: false,
     },
-    viewPath: './app/ui/email/',
+    viewPath: path.resolve('./app/ui/email/'),
   };
 
   // use a template file with nodemailer
