@@ -1,5 +1,5 @@
-import AcmeLogo from "@/app/ui/acme-logo";
-import SignUpForm from "../ui/sign-up-form";
+import AcmeLogo from '@/app/ui/acme-logo';
+import SignUpForm from '../ui/sign-up-form';
 
 export default function Page() {
   return (
@@ -13,5 +13,5 @@ export default function Page() {
         <SignUpForm />
       </div>
     </main>
-  )
+  );
 }

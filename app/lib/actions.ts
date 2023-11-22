@@ -10,9 +10,9 @@ import { redirect } from 'next/navigation';
 
 import { signIn } from '@/auth';
 
-const hbs = require('nodemailer-express-handlebars')
-const nodemailer = require('nodemailer')
-const path = require('path')
+const hbs = require('nodemailer-express-handlebars');
+const nodemailer = require('nodemailer');
+const path = require('path');
 
 export type State = {
   errors?: {
@@ -57,42 +57,45 @@ export async function registerEmail(
   prevState: string | undefined,
   formData: FormData,
 ) {
-  const transporter = nodemailer.createTransport(
-    {
-        service: 'gmail',
-        auth:{
-            user: 'testsentry.000097@gmail.com',
-            pass: 'xaur zbij ywcg cclt'
-        }
-    }
-  );
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'testsentry.000097@gmail.com',
+      pass: 'xaur zbij ywcg cclt',
+    },
+  });
 
   const handlebarOptions = {
     viewEngine: {
-        partialsDir: path.resolve('./app/ui/email/'),
-        defaultLayout: false,
+      extName: '.handlebars',
+      partialsDir: path.resolve('./app/ui/email/'),
+      defaultLayout: false,
     },
     viewPath: path.resolve('./app/ui/email/'),
+    extName: '.handlebars',
   };
 
   // use a template file with nodemailer
-  transporter.use('compile', hbs(handlebarOptions))
+  transporter.use('compile', hbs(handlebarOptions));
 
   const mailOptions = {
     from: 'testsentry.000097@gmail.com', // sender address
-    template: "email", // the name of the template file, i.e., email.handlebars
+    template: 'email', // the name of the template file, i.e., email.handlebars
     to: formData.get('email'),
     subject: `Welcome to My Company, ${formData.get('email')}`,
     context: {
       name: formData.get('email'),
-      company: 'my company'
+      company: 'my company',
     },
   };
   try {
     await transporter.sendMail(mailOptions);
     return 'Sign up successfully';
   } catch (error) {
-    console.log(`Nodemailer error sending email to ${formData.get('email')}`, error);
+    console.log(
+      `Nodemailer error sending email to ${formData.get('email')}`,
+      error,
+    );
     throw error;
   }
 }

@@ -12,17 +12,17 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const { replace } = useRouter();
 
   const subscribe = (listener: () => void) => {
-    window.addEventListener("storage", listener);
+    window.addEventListener('storage', listener);
 
     return () => {
-      window.removeEventListener("storage", listener);
-    }
-  }
+      window.removeEventListener('storage', listener);
+    };
+  };
 
   const getSnapshot = () => {
-    return localStorage.getItem("myItem");
-  }
-  
+    return localStorage.getItem('myItem');
+  };
+
   const value = useSyncExternalStore(subscribe, getSnapshot);
 
   useEffect(() => {
