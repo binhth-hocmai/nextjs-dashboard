@@ -67,10 +67,11 @@ export async function registerEmail(
 
   const handlebarOptions = {
     viewEngine: {
+      layoutDir: './public/email',
       extName: '.handlebars',
-      defaultLayout: false,
+      partialsDir: './public/email'
     },
-    viewPath: path.resolve('./public/email'),
+    viewPath: './public/email',
     extName: '.handlebars',
   };
 
