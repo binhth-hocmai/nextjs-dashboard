@@ -11,7 +11,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const subscribe = (listener) => {
+  const subscribe = (listener: () => void) => {
     window.addEventListener("storage", listener);
 
     return () => {

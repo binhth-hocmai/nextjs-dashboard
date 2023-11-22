@@ -90,8 +90,10 @@ export async function registerEmail(
   };
   try {
     await transporter.sendMail(mailOptions);
+    return 'Sign up successfully';
   } catch (error) {
     console.log(`Nodemailer error sending email to ${formData.get('email')}`, error);
+    throw error;
   }
 }
 
