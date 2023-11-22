@@ -39,8 +39,6 @@ const FormSchema = z.object({
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 
-const viewpath = path.join(__dirname, "email");
-
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
@@ -69,9 +67,11 @@ export async function registerEmail(
 
   const handlebarOptions = {
     viewEngine: {
+      extName: '.handlebars',
+      partialsDir: path.resolve('./app/ui/email/'),
       defaultLayout: false,
     },
-    viewPath: viewpath,
+    viewPath: path.resolve('email'),
     extName: '.handlebars',
   };
 
