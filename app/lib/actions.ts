@@ -10,6 +10,10 @@ import { redirect } from 'next/navigation';
 
 import { signIn } from '@/auth';
 
+const hbs = require('nodemailer-express-handlebars')
+const nodemailer = require('nodemailer')
+const path = require('path')
+
 export type State = {
   errors?: {
     customerId?: string[];
@@ -46,6 +50,48 @@ export async function authenticate(
       return 'CredentialsSignin';
     }
     throw error;
+  }
+}
+
+export async function registerEmail(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  const transporter = nodemailer.createTransport(
+    {
+        service: 'gmail',
+        auth:{
+            user: 'testsentry.000097@gmail.com',
+            pass: 'xaur zbij ywcg cclt'
+        }
+    }
+  );
+
+  const handlebarOptions = {
+    viewEngine: {
+        partialsDir: './app/ui/email/',
+        defaultLayout: false,
+    },
+    viewPath: './app/ui/email/',
+  };
+
+  // use a template file with nodemailer
+  transporter.use('compile', hbs(handlebarOptions))
+
+  const mailOptions = {
+    from: 'testsentry.000097@gmail.com', // sender address
+    template: "email", // the name of the template file, i.e., email.handlebars
+    to: formData.get('email'),
+    subject: `Welcome to My Company, ${formData.get('email')}`,
+    context: {
+      name: formData.get('email'),
+      company: 'my company'
+    },
+  };
+  try {
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.log(`Nodemailer error sending email to ${formData.get('email')}`, error);
   }
 }
 

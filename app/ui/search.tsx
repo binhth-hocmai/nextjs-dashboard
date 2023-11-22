@@ -4,11 +4,30 @@ import { useDebouncedCallback } from 'use-debounce';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useEffect, useSyncExternalStore } from 'react';
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+
+  const subscribe = (listener) => {
+    window.addEventListener("storage", listener);
+
+    return () => {
+      window.removeEventListener("storage", listener);
+    }
+  }
+
+  const getSnapshot = () => {
+    return localStorage.getItem("myItem");
+  }
+  
+  const value = useSyncExternalStore(subscribe, getSnapshot);
+
+  useEffect(() => {
+    console.log('value: ', value);
+  }, [value]);
 
   const handleSearch = useDebouncedCallback((term: string) => {
     console.log(`Searching... ${term}`);
