@@ -39,7 +39,7 @@ const FormSchema = z.object({
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 
-const viewpath = path.join(__dirname, "../../../../app/ui/email");
+const viewpath = path.join(__dirname, "email");
 
 export async function authenticate(
   prevState: string | undefined,
