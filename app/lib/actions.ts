@@ -69,9 +69,10 @@ export async function registerEmail(
     viewEngine: {
       extName: '.handlebars',
       partialsDir: path.resolve('./app/ui/email/'),
+      layoutsDir: path.resolve('./app/ui/email/'),
       defaultLayout: false,
     },
-    viewPath: path.resolve('email'),
+    viewPath: path.resolve('./app/ui/email/'),
     extName: '.handlebars',
   };
 
