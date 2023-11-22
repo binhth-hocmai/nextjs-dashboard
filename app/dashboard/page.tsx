@@ -1,19 +1,23 @@
 import { Suspense } from 'react';
 
-import RevenueChart from "@/app/ui/dashboard/revenue-chart";
-import { fetchCardData } from "@/app/lib/data";
-import LatestInvoices from "@/app/ui/dashboard/latest-invoices";
+import RevenueChart from '@/app/ui/dashboard/revenue-chart';
+import { fetchCardData } from '@/app/lib/data';
+import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import CardWrapper, { Card } from '../ui/dashboard/cards';
-import { CardsSkeleton, LatestInvoicesSkeleton, RevenueChartSkeleton } from '../ui/skeletons';
+import {
+  CardsSkeleton,
+  LatestInvoicesSkeleton,
+  RevenueChartSkeleton,
+} from '../ui/skeletons';
 
-interface Props{}
+interface Props {}
 
 export default function Page(props: Props) {
   // const revenue = await fetchRevenue();
   // const latestInvoices = await fetchLatestInvoices();
   // const numberOfInvoices = await sql<number>`SELECT COUNT(*) FROM invoices`;
   // const { numberOfInvoices, totalPendingInvoices, totalPaidInvoices, numberOfCustomers } = await fetchCardData();
-  
+
   return (
     <main className="w-full">
       <h1 className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -26,18 +30,18 @@ export default function Page(props: Props) {
           value={numberOfCustomers}
           type="customers"
         /> */}
-        <Suspense fallback={<CardsSkeleton/>}>
+        <Suspense fallback={<CardsSkeleton />}>
           <CardWrapper />
         </Suspense>
       </h1>
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        <Suspense fallback={<RevenueChartSkeleton/>}>
-          <RevenueChart  />
+        <Suspense fallback={<RevenueChartSkeleton />}>
+          <RevenueChart />
         </Suspense>
-        <Suspense fallback={<LatestInvoicesSkeleton/>}>
+        <Suspense fallback={<LatestInvoicesSkeleton />}>
           <LatestInvoices />
         </Suspense>
       </div>
     </main>
-  )
+  );
 }

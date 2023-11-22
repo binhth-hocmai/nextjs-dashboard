@@ -1,6 +1,18 @@
-import React from 'react'
+import React from 'react';
 
-import SidebNav from '@/app/ui/dashboard/sidenav'
+import { Metadata } from 'next';
+
+import SidebNav from '@/app/ui/dashboard/sidenav';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Acme Dashboard',
+    default: 'Acme Dashboard',
+  },
+  description: 'The official Next.js Learn Dashboard built with App Router.',
+  keywords: 'Acme, acme dashboard',
+  metadataBase: new URL('https://nextjs-dashboard-jq24.vercel.app'),
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,5 +23,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* <div className="flex-grow p-6 md:overflex-y-auto md:p-2"></div> */}
       {children}
     </div>
-  )
+  );
 }

@@ -56,7 +56,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
     amount: formData.get('amount'),
     status: formData.get('status'),
   });
- 
+
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
@@ -64,13 +64,13 @@ export async function createInvoice(prevState: State, formData: FormData) {
       message: 'Missing Fields. Failed to Create Invoice.',
     };
   }
-  
+
   const { customerId, amount, status } = CreateInvoice.parse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
   });
-  
+
   const amountInCents = amount * 100;
   const date = new Date().toISOString().split('T')[0];
 
@@ -82,20 +82,24 @@ export async function createInvoice(prevState: State, formData: FormData) {
   } catch (error) {
     return {
       message: 'Database Error: Failed to Create Invoice. ',
-    }
+    };
   }
   revalidatePath('/dashoard/invoices');
   redirect('/dashboard/invoices');
 }
 
-export async function updateInvoice(id: string, prevState: State, formData: FormData) {
+export async function updateInvoice(
+  id: string,
+  prevState: State,
+  formData: FormData,
+) {
   // Validate form fields using Zod
   const validatedFields = CreateInvoice.safeParse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
   });
- 
+
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
     return {
@@ -103,7 +107,7 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
       message: 'Missing Fields. Failed to Create Invoice.',
     };
   }
-  
+
   const { customerId, amount, status } = CreateInvoice.parse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
@@ -122,7 +126,7 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
   } catch (error) {
     return {
       message: 'Database Error: Failed to Update Invoice. ',
-    }
+    };
   }
   revalidatePath('/dashoard/invoices');
   redirect('/dashboard/invoices');
@@ -135,7 +139,7 @@ export async function deleteInvoice(invoiceId: string) {
   } catch (error) {
     return {
       message: 'Database Error: Failed to Delete Invoice. ',
-    }
+    };
   }
   revalidatePath('/dashboard/invoices');
 }

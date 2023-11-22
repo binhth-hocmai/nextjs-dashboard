@@ -1,19 +1,26 @@
-import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
-import { redirect, notFound } from "next/navigation";
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
-import { fetchCustomers, fetchInvoiceById } from "@/app/lib/data";
+import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
+import { fetchCustomers, fetchInvoiceById } from '@/app/lib/data';
 
-import EditInvoiceForm from "@/app/ui/invoices/edit-form";
+import EditInvoiceForm from '@/app/ui/invoices/edit-form';
+
+export const metadata: Metadata = {
+  title: 'Edit Invoices',
+};
 
 export default async function Page({
   params,
 }: {
   params: {
     id: string;
-  }
+  };
 }) {
-
-  const [invoice, customers] = await Promise.all([fetchInvoiceById(params.id), fetchCustomers()]);
+  const [invoice, customers] = await Promise.all([
+    fetchInvoiceById(params.id),
+    fetchCustomers(),
+  ]);
 
   if (!invoice) {
     notFound();
@@ -31,10 +38,10 @@ export default async function Page({
             label: 'Edit Invoices',
             href: `dashboard/invoices/${params?.id}/edit`,
             active: true,
-          }
+          },
         ]}
       />
       <EditInvoiceForm customers={customers} invoice={invoice} />
     </main>
-  )
+  );
 }

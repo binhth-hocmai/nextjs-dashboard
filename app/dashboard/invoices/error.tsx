@@ -1,16 +1,22 @@
-'use client'
+'use client';
 
+import { Metadata } from 'next';
 import { useEffect } from 'react';
 
+export const metadata: Metadata = {
+  title: 'Error Page',
+};
+
 export default function Error({
-  error, reset
+  error,
+  reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error(error)
-  }, [error])
+    console.error(error);
+  }, [error]);
 
   return (
     <main className="w-full flex h-full flex-col items-center justify-center">
@@ -25,5 +31,5 @@ export default function Error({
         Try again
       </button>
     </main>
-  )
+  );
 }
