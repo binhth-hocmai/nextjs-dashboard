@@ -3,12 +3,12 @@
 import { z } from 'zod';
 
 import { sql } from '@vercel/postgres';
-import { Invoice } from './definitions';
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { signIn } from '@/auth';
+import { resolve } from 'path';
 
 const hbs = require('nodemailer-express-handlebars');
 const nodemailer = require('nodemailer');
@@ -57,6 +57,7 @@ export async function registerEmail(
   prevState: string | undefined,
   formData: FormData,
 ) {
+  const templateDir = resolve(process.cwd(), "public/js/mail/views");
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -67,11 +68,12 @@ export async function registerEmail(
 
   const handlebarOptions = {
     viewEngine: {
-      layoutDir: './public/email',
+      defaultLayout: false,
+      layoutsDir: templateDir,
       extName: '.handlebars',
-      partialsDir: './public/email'
+      partialsDir: templateDir
     },
-    viewPath: './public/email',
+    viewPath: templateDir,
     extName: '.handlebars',
   };
 
