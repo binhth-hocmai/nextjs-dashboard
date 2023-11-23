@@ -8,11 +8,10 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { signIn } from '@/auth';
-import { resolve } from 'path';
 
 const hbs = require('nodemailer-express-handlebars');
 const nodemailer = require('nodemailer');
-const path = require('path');
+import * as fs from 'fs';
 
 export type State = {
   errors?: {
@@ -57,7 +56,10 @@ export async function registerEmail(
   prevState: string | undefined,
   formData: FormData,
 ) {
-  const templateDir = resolve(process.cwd(), "public/js/mail/views");
+  console.log('process.cwd(): ', process.cwd());
+  console.log('__dirname: ', __dirname);
+  
+  const templateDir = `${process.cwd()}/public/js/mail/views`
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -71,7 +73,6 @@ export async function registerEmail(
       defaultLayout: false,
       layoutsDir: templateDir,
       extName: '.handlebars',
-      partialsDir: templateDir
     },
     viewPath: templateDir,
     extName: '.handlebars',
